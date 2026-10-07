@@ -1,0 +1,448 @@
+/* RESET & BASE */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg-color: #0f0714;
+  --text-primary: #fdf5f8;
+  --text-secondary: #d6b8c9;
+  --accent-blush: #f2a6be;
+  --accent-gold: #e6c898;
+  --accent-plum: #4a2b3f;
+  
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+}
+html { 
+  scroll-behavior: smooth; 
+  background-color: var(--bg-color);
+}
+body {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background-color: var(--bg-color);
+  overflow-x: hidden;
+  /* Disable pull-to-refresh on mobile */
+  overscroll-behavior-y: none;
+}
+
+/* MUSIC TOGGLE */
+.music-toggle {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.music-toggle.playing {
+  background: rgba(242, 166, 190, 0.12);
+  color: var(--accent-blush);
+  border-color: rgba(242, 166, 190, 0.25);
+}
+
+/* THREE.JS CONTAINER */
+#scene-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none; /* Let clicks pass through */
+}
+#scene-container.interactive {
+  pointer-events: auto; /* Enable touch interaction with 3D */
+}
+
+/* PROGRESS BAR */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-blush), var(--accent-gold));
+  width: 0%;
+  z-index: 100;
+  transition: width 0.1s;
+}
+
+/* MAIN CONTENT */
+main {
+  position: relative;
+  z-index: 10;
+}
+
+/* MOBILE FIRST SCENES */
+.scene {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 24px;
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Center composition on desktop */
+@media (min-width: 500px) {
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at center, transparent 400px, rgba(0,0,0,0.85) 100%);
+    z-index: 5;
+    pointer-events: none;
+  }
+}
+
+.content-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.center-content {
+  align-items: center;
+  text-align: center;
+}
+
+/* TYPOGRAPHY */
+h1, h2, h3, .emotional-text, .final-title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+}
+
+/* SCENE 1: HOOK */
+.scene-1 {
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  padding-top: 15vh;
+  padding-bottom: 8vh;
+  z-index: 11; /* Keep above 3D initially for clicks */
+  pointer-events: none; /* but let buttons be clickable */
+}
+.scene-1 .content-wrapper { pointer-events: auto; }
+
+.subtle-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-secondary);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.main-title {
+  font-size: clamp(32px, 8vw, 38px);
+  line-height: 1.25;
+  margin-bottom: 40px;
+  color: var(--text-primary);
+}
+.countdown-container {
+  margin-bottom: 40px;
+}
+.countdown {
+  font-size: 42px;
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--accent-gold), #fff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.countdown-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.hint-text {
+  font-size: 13px;
+  color: rgba(214, 184, 201, 0.7);
+  margin-bottom: 16px;
+  font-style: italic;
+}
+.primary-btn {
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+  border: 1px solid rgba(255,255,255,0.25);
+  color: var(--text-primary);
+  padding: 18px 36px;
+  border-radius: 40px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.primary-btn:active {
+  transform: scale(0.95);
+  background: rgba(255,255,255,0.1);
+}
+.primary-btn.fade-out {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+}
+
+/* SCENE 2: REVEAL */
+.scene-2 {
+  text-align: center;
+  justify-content: flex-end;
+  padding-bottom: 12vh;
+  pointer-events: none;
+}
+.reveal-text {
+  transition: opacity 1.5s ease 0.5s, transform 1.5s ease 0.5s;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.reveal-text.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-text h2 {
+  font-size: 26px;
+  line-height: 1.4;
+  margin-bottom: 30px;
+  color: var(--text-primary);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+.scroll-indicator {
+  font-size: 11px;
+  color: var(--text-secondary);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  animation: bounce 2s infinite ease-in-out;
+  opacity: 0.8;
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-8px); }
+  60% { transform: translateY(-4px); }
+}
+
+/* SCENE 3: MESSAGE */
+.scene-3 {
+  justify-content: center;
+}
+.emotional-text {
+  font-size: 26px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  color: var(--text-secondary);
+}
+.emotional-text.highlight {
+  color: var(--accent-blush);
+  font-size: 30px;
+  margin-bottom: 36px;
+}
+.message-body {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  padding: 35px 28px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+.message-body p {
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: rgba(255,255,255,0.9);
+  font-weight: 300;
+}
+.message-body .signature {
+  margin-top: 35px;
+  margin-bottom: 0;
+  color: var(--accent-gold);
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-size: 17px;
+}
+
+/* SCENE 4: MEMORIES (3D GALLERY) */
+.scene-4 {
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+}
+.section-title {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 45px;
+  color: var(--accent-gold);
+  letter-spacing: 0.5px;
+}
+.gallery-3d-container {
+  perspective: 1000px;
+  width: 100%;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0 50px 0;
+  overflow: visible;
+}
+.gallery-3d {
+  position: relative;
+  width: 160px;
+  height: 220px;
+  transform-style: preserve-3d;
+  animation: rotateGallery 20s linear infinite;
+}
+.gallery-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+  transform: rotateY(calc(var(--i) * (360deg / 5))) translateZ(180px);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+}
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.gallery-caption {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 20px;
+}
+@keyframes rotateGallery {
+  0% { transform: perspective(1000px) rotateY(0deg); }
+  100% { transform: perspective(1000px) rotateY(360deg); }
+}
+
+/* SCENE 5: LITTLE THINGS */
+.scene-5 {
+  padding-top: 8vh;
+  padding-bottom: 8vh;
+}
+.wish-list {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  margin-top: 50px;
+  width: 100%;
+}
+.wish-item {
+  font-size: 26px;
+  color: var(--text-primary);
+  opacity: 0.95;
+  text-align: center;
+}
+.wish-item:nth-child(even) {
+  color: var(--accent-blush);
+}
+
+/* SCENE 6: THE CAKE */
+.scene-6 {
+  justify-content: flex-end;
+  padding-bottom: 18vh;
+  text-align: center;
+  pointer-events: none;
+}
+.scene-6 .content-wrapper {
+  pointer-events: auto;
+}
+.make-a-wish {
+  font-size: 40px;
+  margin-bottom: 30px;
+  color: var(--accent-gold);
+  text-shadow: 0 2px 15px rgba(230, 200, 152, 0.3);
+}
+.interaction-hint {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.wish-btn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--accent-blush);
+  color: var(--accent-blush);
+  padding: 14px 36px;
+  border-radius: 40px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.wish-btn:active {
+  background: rgba(242, 166, 190, 0.15);
+  transform: scale(0.96);
+}
+
+/* SCENE 7: FINAL MESSAGE */
+.scene-7 {
+  text-align: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(74, 43, 63, 0.4) 0%, transparent 60%);
+}
+.final-title {
+  font-size: clamp(38px, 10vw, 46px);
+  line-height: 1.25;
+  margin-bottom: 36px;
+  color: var(--accent-blush);
+}
+.final-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 48px;
+  font-weight: 300;
+}
+.final-note {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  color: var(--text-primary);
+  font-style: italic;
+}
+
+/* ANIMATIONS & UTILS */
+.hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+.fade-in-on-scroll {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.fade-in-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

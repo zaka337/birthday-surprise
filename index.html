@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Happy Birthday Sibgha ✨</title>
+  <meta name="theme-color" content="#160a12" />
+  
+  <!-- Preconnect and Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Optional Music - Handled by script -->
+  <div class="music-toggle" id="musicToggle">
+    <span class="music-icon">♫</span> Turn on the music
+  </div>
+
+  <!-- 3D Canvas Container -->
+  <div id="scene-container" aria-hidden="true"></div>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress-bar" id="progressBar"></div>
+
+  <main id="main-content">
+    
+    <!-- SCENE 1: THE HOOK -->
+    <section class="scene scene-1" id="scene-1">
+      <div class="content-wrapper">
+        <h2 class="subtle-text">Hey, <span id="personal-name">Sibgha</span>...</h2>
+        <h1 class="main-title">Tonight is a<br>little different.</h1>
+        
+        <div class="countdown-container">
+          <div class="countdown" id="countdown">00:00:00</div>
+          <div class="countdown-label">until your day begins ✨</div>
+        </div>
+        
+        <div class="hint-text">Turn your sound on ♡</div>
+        <button class="primary-btn" id="startBtn">Open your surprise</button>
+      </div>
+    </section>
+
+    <!-- SCENE 2: THE REVEAL -->
+    <section class="scene scene-2" id="scene-2">
+      <div class="content-wrapper">
+        <div class="reveal-text hidden" id="revealText">
+           <h2>A tiny universe<br>made just for you.</h2>
+           <div class="scroll-indicator">Swipe up ↑</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 3: THE MESSAGE -->
+    <section class="scene scene-3">
+      <div class="content-wrapper">
+        <p class="emotional-text fade-in-on-scroll">Some people make life louder.</p>
+        <p class="emotional-text highlight fade-in-on-scroll">You make it brighter.</p>
+        
+        <div class="message-body fade-in-on-scroll">
+          <p id="personal-message-1">[PERSONAL MESSAGE HERE]</p>
+          <p id="personal-message-2">I hope this year gives you more reasons to smile, more places to go, and reminds you how loved you are.</p>
+          <p class="signature" id="personal-signature">— Someone who thinks you're amazing</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 4: MEMORIES -->
+    <section class="scene scene-4">
+      <div class="content-wrapper">
+        <h2 class="section-title fade-in-on-scroll">Beautiful Moments</h2>
+        
+        <div class="gallery-3d-container fade-in-on-scroll">
+          <div class="gallery-3d" id="gallery3d">
+            <div class="gallery-item" style="--i: 1">
+              <img id="photo-1" src="public/media/WhatsApp Image 2026-10-07 at 10.23.36 PM.jpeg" alt="Memory 1" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmRhZWIiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM4YTUzNzYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5bUEhPVE8gMV08L3RleHQ+PC9zdmc+'">
+            </div>
+            <div class="gallery-item" style="--i: 2">
+              <img id="photo-2" src="public/media/WhatsApp Image 2026-10-07 at 10.23.37 PM (3).jpeg" alt="Memory 2" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmRhZWIiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM4YTUzNzYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5bUEhPVE8gMl08L3RleHQ+PC9zdmc+'">
+            </div>
+            <div class="gallery-item" style="--i: 3">
+              <img id="photo-3" src="public/media/WhatsApp Image 2026-10-07 at 10.23.37 PM (4).jpeg" alt="Memory 3" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmRhZWIiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM4YTUzNzYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5bUEhPVE8gM108L3RleHQ+PC9zdmc+'">
+            </div>
+            <div class="gallery-item" style="--i: 4">
+              <img id="photo-4" src="public/media/WhatsApp Image 2026-10-07 at 10.23.37 PM (5).jpeg" alt="Memory 4" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmRhZWIiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM4YTUzNzYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5bUEhPVE8gNF08L3RleHQ+PC9zdmc+'">
+            </div>
+            <div class="gallery-item" style="--i: 5">
+              <img id="photo-5" src="public/media/WhatsApp Image 2026-10-07 at 10.23.37 PM (6).jpeg" alt="Memory 5" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmRhZWIiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM4YTUzNzYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5bUEhPVE8gNV08L3RleHQ+PC9zdmc+'">
+            </div>
+          </div>
+        </div>
+        <p class="gallery-caption fade-in-on-scroll" id="gallery-caption">[MEMORY CAPTION HERE]</p>
+      </div>
+    </section>
+
+    <!-- SCENE 5: LITTLE THINGS -->
+    <section class="scene scene-5">
+      <div class="content-wrapper center-content">
+        <h2 class="subtle-text fade-in-on-scroll">I wish for you...</h2>
+        <div class="wish-list">
+          <h3 class="wish-item fade-in-on-scroll">More sunsets.</h3>
+          <h3 class="wish-item fade-in-on-scroll">More adventures.</h3>
+          <h3 class="wish-item fade-in-on-scroll">More reasons to laugh.</h3>
+          <h3 class="wish-item fade-in-on-scroll">More moments you'll never forget.</h3>
+          <h3 class="wish-item fade-in-on-scroll">More dreams coming true.</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 6: THE CAKE (3D INTERACTION) -->
+    <section class="scene scene-6" id="scene-6">
+      <div class="content-wrapper center-content" style="justify-content: flex-end; height: 100%;">
+        <h2 class="make-a-wish fade-in-on-scroll">Make a wish ✨</h2>
+        <div class="cake-interaction fade-in-on-scroll">
+          <div class="interaction-hint">Tap to blow out the candles</div>
+          <button class="wish-btn" id="wishBtn">Make Wish</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 7: FINAL MESSAGE -->
+    <section class="scene scene-7" id="scene-7">
+      <div class="content-wrapper">
+        <h1 class="final-title fade-in-on-scroll">Happy Birthday,<br><span id="final-name">Sibgha</span>.</h1>
+        <p class="final-text fade-in-on-scroll">I hope when you look back at this year,<br>you realize just how many beautiful things<br>were waiting for you.</p>
+        <p class="final-note fade-in-on-scroll">Keep being you. ♡</p>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
