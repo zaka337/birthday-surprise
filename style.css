@@ -13,15 +13,23 @@
 }
 html { 
   scroll-behavior: smooth; 
-  background-color: var(--bg-color);
+  background-color: #1a0b1c;
 }
 body {
   font-family: var(--font-sans);
   color: var(--text-primary);
-  background-color: var(--bg-color);
+  background: linear-gradient(-45deg, #2d1123, #18091a, #1a0b1c, #331526, #411d33);
+  background-size: 400% 400%;
+  animation: gradientBG 18s ease infinite;
   overflow-x: hidden;
   /* Disable pull-to-refresh on mobile */
   overscroll-behavior-y: none;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* MUSIC TOGGLE */
